@@ -100,7 +100,7 @@ class LLMPPOAgent(BasePPOAgent):
             dist = Categorical(logits=scores)
             values = torch.stack([_o["value"][0] for _o in output])
             
-            action = dist.sample()
+            action = dist.sample().unsquzze(0)
             a = action.cpu().numpy()
 
             for j in range(self.num_procs):
